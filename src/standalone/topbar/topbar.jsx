@@ -10,6 +10,7 @@ import beautifyJson from "json-beautify"
 import "react-dd-menu/dist/react-dd-menu.css"
 import "./topbar.less"
 import Logo from "./logo_small.png"
+import gapi from "googleapis"
 
 export default class Topbar extends React.Component {
   
