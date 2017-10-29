@@ -13,11 +13,6 @@ import Logo from "./logo_small.png"
 
 export default class Topbar extends React.Component {
   
-    gref = {
-        "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
-        "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-    };
- 
     
   constructor(props, context) {
     super(props, context)
@@ -160,6 +155,11 @@ export default class Topbar extends React.Component {
   
   // Google Integration
   installToDrive = () => {
+      let gref = {
+              "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
+              "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+          };
+       
       gref.scope = "https://www.googleapis.com/auth/drive.install";
       gapi.client.init(gref).then(function(){
           gapi.auth2.getAuthInstance().signIn().then(function(){
