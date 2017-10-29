@@ -12,6 +12,13 @@ import "./topbar.less"
 import Logo from "./logo_small.png"
 
 export default class Topbar extends React.Component {
+  
+    gref = {
+        "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
+        "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+    };
+ 
+    
   constructor(props, context) {
     super(props, context)
 
@@ -150,6 +157,24 @@ export default class Topbar extends React.Component {
     }
   }
 
+  
+  // Google Integration
+  installToDrive = () => {
+      gref.scope = "https://www.googleapis.com/auth/drive.install";
+      gapi.client.init(gref).then(function(){
+          gapi.auth2.getAuthInstance().signIn().then(function(){
+              alert("Installation done.");
+          }).catch(function(err){
+              console.log(err)
+              alert("Error! See console for details.");
+          });         
+      }).catch(function(err){
+          console.log(err);
+          alert("Error! See console for details.");
+      });
+      
+  }
+  
   // Helpers
 
   showModal = () => {
@@ -185,6 +210,9 @@ export default class Topbar extends React.Component {
               <img height="30" width="30" className="topbar-logo__img" src={ Logo } alt=""/>
               <span className="topbar-logo__title">Swagger Editor</span>
             </Link>
+              <DropdownMenu {...makeMenuOptions("Google")}>
+              <li><button type="button" onClick={this.installToDrive}>Install to drive</button></li>
+            </DropdownMenu>
             <DropdownMenu {...makeMenuOptions("File")}>
               <li><button type="button" onClick={this.importFromURL}>Import URL</button></li>
               <li><button type="button" onClick={this.showModal}>Import File</button></li>
