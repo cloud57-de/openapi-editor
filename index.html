@@ -47,7 +47,14 @@
   <div id="swagger-editor"></div>
   <script src="./dist/swagger-editor-bundle.js"> </script>
   <script src="./dist/swagger-editor-standalone-preset.js"> </script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
+  const gref = {
+          "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
+          "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+      };
+  
   window.onload = function() {
     // Build a system
     const editor = SwaggerEditorBundle({

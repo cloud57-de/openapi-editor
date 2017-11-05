@@ -29,7 +29,7 @@ const plugins = {
   EditorAutosuggestKeywordsPlugin,
   EditorAutosuggestRefsPlugin,
   EditorAutosuggestOAS3KeywordsPlugin,
-  JumpToPathPlugin,
+  JumpToPathPlugin
 }
 
 const defaults = {

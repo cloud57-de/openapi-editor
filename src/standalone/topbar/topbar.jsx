@@ -10,7 +10,6 @@ import beautifyJson from "json-beautify"
 import "react-dd-menu/dist/react-dd-menu.css"
 import "./topbar.less"
 import Logo from "./logo_small.png"
-import gapi from "googleapis"
 
 export default class Topbar extends React.Component {
   
@@ -156,25 +155,28 @@ export default class Topbar extends React.Component {
   
   // Google Integration
   installToDrive = () => {
-      let gref = {
+      const gref = {
               "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
               "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+              "scope": "https://www.googleapis.com/auth/drive.install"
           };
-       
-      gref.scope = "https://www.googleapis.com/auth/drive.install";
-      gapi.client.init(gref).then(function(){
-          gapi.auth2.getAuthInstance().signIn().then(function(){
-              alert("Installation done.");
-          }).catch(function(err){
-              console.log(err)
-              alert("Error! See console for details.");
-          });         
-      }).catch(function(err){
-          console.log(err);
-          alert("Error! See console for details.");
-      });
       
+      alert("Here we are");
+      gapi.load('client:auth2', () => {
+          gapi.client.init(gref).then(function(){
+              gapi.auth2.getAuthInstance().signIn().then(function(){
+                  alert("Installation done.");
+              }).catch(function(err){
+                  console.log(err)
+                  alert("Error! See console for details.");
+              });         
+          }).catch(function(err){
+              console.log(err);
+              alert("Error! See console for details.");
+          });
+      });
   }
+  
   
   // Helpers
 
