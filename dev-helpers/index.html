@@ -76,7 +76,7 @@
 
 	// Basics
 	
-	var state = new RegExp('[\?&]' + state + '=([^&#]*)').exec(window.location.href);
+	var state = new RegExp('[\?&]state=([^&#]*)').exec(window.location.href);
 	if (state != null) {
 		state = JSON.parse(decodeURI(state));
 		gapi.client.init(gref).then(function(){
