@@ -65,57 +65,8 @@
 
 	    window.editor = editor
 	    
-	    const gref = {
-	            "client_id":"51313937101-ta7sqbf7emoqmb2le2lqs1a66oepnfc5.apps.googleusercontent.com",
-	            "discoveryDocs": ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-	            "scope": "https://www.googleapis.com/auth/drive"
-	        };
-
-		// Basics
-		
-		var state = new RegExp('[\?&]state=([^&#]*)').exec(window.location.href);
-		if (state != null) {
-			state = JSON.parse(decodeURI(state[1]));
-			gapi.load('client:auth2', () => {
-				gapi.client.init(gref).then(function(){
-			
-					if(gapi.auth2.getAuthInstance().currentUser.get().isSignedIn()){
-						showContent(state);
-					} else {
-						gapi.auth2.getAuthInstance().signIn().then(function(){
-							showContent(state);
-						}).catch(function(err){
-							console.log(err)
-							alert("Error! See console for details.");
-						});			
-					}
-				}).catch(function(err){
-					console.log(err);
-					alert("Error! See console for details.");
-				});
-			});
-		}
 	  };
 	  
-	  	function showContent(state) {
-			token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token;
-			if (state.action == "open") {
-				id = state.ids[0];
-				$.ajax({
-					url: "https://www.googleapis.com/drive/v3/files/"+id+"?alt=media",
-					headers : {"Authorization":"Bearer " + token}
-				}).then(function(data){
-					alert(data);
-
-				}).catch(function(err){
-					console.log(err);
-					alert("Error! See console for details.");
-				});
-
-			}
-	  	}	
-	  
-
   </script>
 
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
