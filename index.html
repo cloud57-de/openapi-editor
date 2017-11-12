@@ -76,23 +76,26 @@
 		var state = new RegExp('[\?&]state=([^&#]*)').exec(window.location.href);
 		if (state != null) {
 			state = JSON.parse(decodeURI(state[1]));
-			gapi.client.init(gref).then(function(){
-				if(gapi.auth2.getAuthInstance().currentUser.get().isSignedIn()){
-					showContent(state);
-				} else {
-					gapi.auth2.getAuthInstance().signIn().then(function(){
+			gapi.load('client:auth2', () => {
+				gapi.client.init(gref).then(function(){
+			
+					if(gapi.auth2.getAuthInstance().currentUser.get().isSignedIn()){
 						showContent(state);
-					}).catch(function(err){
-						console.log(err)
-						alert("Error! See console for details.");
-					});			
-				}
-			}).catch(function(err){
-				console.log(err);
-				alert("Error! See console for details.");
+					} else {
+						gapi.auth2.getAuthInstance().signIn().then(function(){
+							showContent(state);
+						}).catch(function(err){
+							console.log(err)
+							alert("Error! See console for details.");
+						});			
+					}
+				}).catch(function(err){
+					console.log(err);
+					alert("Error! See console for details.");
+				});
 			});
 		}
-	  }
+	  };
 	  
 	  	function showContent(state) {
 			token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token;
