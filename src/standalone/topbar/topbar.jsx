@@ -161,7 +161,6 @@ export default class Topbar extends React.Component {
               "scope": "https://www.googleapis.com/auth/drive.install"
           };
       
-      alert("Here we are");
       gapi.load('client:auth2', () => {
           gapi.client.init(gref).then(function(){
               gapi.auth2.getAuthInstance().signIn().then(function(){
