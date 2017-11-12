@@ -78,7 +78,7 @@
 	
 	var state = new RegExp('[\?&]state=([^&#]*)').exec(window.location.href);
 	if (state != null) {
-		state = JSON.parse(decodeURI(state));
+		state = JSON.parse(decodeURI(state[1]));
 		gapi.client.init(gref).then(function(){
 			if(gapi.auth2.getAuthInstance().currentUser.get().isSignedIn()){
 				showContent(state);
