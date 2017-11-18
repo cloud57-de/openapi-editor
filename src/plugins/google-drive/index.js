@@ -68,7 +68,7 @@ function showContent(state) {
 			url: "https://www.googleapis.com/drive/v3/files/"+id+"?alt=media",
 			headers : {"Authorization":"Bearer " + token}
 		}).then(function(data){
-			system.specActions.updateSpec(data)
+			window.editor.specActions.updateSpec(data);
 
 		}).catch(function(err){
 			console.log(err);
